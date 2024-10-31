@@ -16,6 +16,7 @@ TARGET_BRANCH="${9}"
 COMMIT_MESSAGE="${10}"
 TARGET_DIRECTORY="${11}"
 CREATE_TARGET_BRANCH_IF_NEEDED="${12}"
+ENABLE_LFS="${13}"
 
 if [ -z "$DESTINATION_REPOSITORY_USERNAME" ]
 then
@@ -61,8 +62,10 @@ CLONE_DIR=$(mktemp -d)
 echo "[+] Git version"
 git --version
 
-echo "[+] Enable git lfs"
-git lfs install
+if [ "$ENABLE_LFS" = "true" ]; then
+    echo "[+] Enable git lfs"
+    git lfs install
+fi
 
 echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
 
